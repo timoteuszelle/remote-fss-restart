@@ -4,8 +4,8 @@ Safe restart of Fss Launcher for FEWS.
 #> 
 $Computer = (Read-Host)
 Invoke-Command -ComputerName $Computer -ScriptBlock {
-    Get-Service -Name *delft* | Stop-Service
-    Get-Process -name *delft* | Stop-Process
-    Get-ChildItem -Path "D:\fews\fss" -Recurse | Where-Object {$_.Name -like "*Running*", "*log*"} | Remove-Item -Force
-    Get-Service -Name *delft* | Start-Service
+    Get-Service -Name FssLauncher | Stop-Service
+    Get-Process -name fssLauncherService | Stop-Process -Force
+    Get-ChildItem -Path "D:\fews\fss" -Recurse | Where-Object {$_.Name -like "*Running*", "*log*","awake"} | Remove-Item -Force
+    Get-Service -Name FssLauncher | Start-Service
 }
